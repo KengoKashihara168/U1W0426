@@ -16,5 +16,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         _player.UpdatePlayer();
+
+        // プレイヤーの移動
+        float x = Input.GetAxis("Horizontal");
+        _player.Move(new Vector3(x,0.0f,0.0f));
     }
 }
