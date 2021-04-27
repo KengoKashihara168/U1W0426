@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private float MoveSpeed = 0.0f; // 移動速度
+    [SerializeField] private float TorqueForce = 0.0f; // 回転力
     private Rigidbody _rigid;
 
     public void Initialize()
@@ -12,19 +14,21 @@ public class Player : MonoBehaviour
         _rigid = GetComponent<Rigidbody>();
     }
 
-    public void UpdatePlayer()
+    /// <summary>
+    /// 左へ移動
+    /// </summary>
+    public void MoveLeft()
     {
-        Debug.Log("プレイヤーの更新");
+        _rigid.AddTorque(Vector3.up * -TorqueForce);
+        _rigid.AddForce(Vector3.forward * MoveSpeed);
     }
 
     /// <summary>
-    /// 移動
+    /// 右へ移動
     /// </summary>
-    /// <param name="dir">方向</param>
-    public void Move(Vector3 dir)
+    public void MoveRight()
     {
-        Vector3 normal = dir.normalized;
-
-        _rigid.AddForce(normal * 20.0f);
+        _rigid.AddTorque(Vector3.up * TorqueForce);
+        _rigid.AddForce(Vector3.forward * MoveSpeed);
     }
 }

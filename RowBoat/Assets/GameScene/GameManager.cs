@@ -19,11 +19,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _player.UpdatePlayer();
-
-        // プレイヤーの移動
-        float x = Input.GetAxis("Horizontal");
-        
+          
     }
 
     /// <summary>
@@ -35,10 +31,10 @@ public class GameManager : MonoBehaviour
         switch(arrow)
         {
             case ButtonManager.ArrowType.Left:
-            _player.Move(new Vector3(-1,0.0f,0.0f));
+            _player.MoveLeft();
             break;
             case ButtonManager.ArrowType.Right:
-            _player.Move(new Vector3(1,0.0f,0.0f));
+            _player.MoveRight();
             break;
         }
     }
