@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private ButtonManager  _buttonManager   = null; // ボタンマネージャー
     [SerializeField] private Player         _player          = null; // プレイヤー
+    [SerializeField] private CameraManager  _cameraManager   = null; // カメラマネージャー
 
     public delegate void ArrowClickedFunc(ButtonManager.ArrowType arrow); // 矢印が押されたときのデリゲート
 
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-          
+        _cameraManager.UpdateCamera();
     }
 
     /// <summary>
