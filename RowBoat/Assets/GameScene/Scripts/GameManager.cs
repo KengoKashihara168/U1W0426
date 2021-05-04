@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ButtonManager  _buttonManager   = null; // ボタンマネージャー
     [SerializeField] private Player         _player          = null; // プレイヤー
     [SerializeField] private CameraManager  _cameraManager   = null; // カメラマネージャー
+    [SerializeField] private WaterFlow      _wsaterFlow      = null; // 水流マネージャー
 
     public delegate void ArrowClickedFunc(ButtonManager.ArrowType arrow); // 矢印が押されたときのデリゲート
 
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         _player.UpdatePlayer();
+        _player.MovementWaterFlow(_wsaterFlow.GetWaterFlow());
         _cameraManager.UpdateCamera();
     }
 

@@ -38,6 +38,15 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// 水流による移動
+    /// </summary>
+    /// <param name="force">移動量</param>
+    public void MovementWaterFlow(Vector3 force)
+    {
+        transform.position += force;
+    }
+
+    /// <summary>
     /// 移動
     /// </summary>
     private void Move()
