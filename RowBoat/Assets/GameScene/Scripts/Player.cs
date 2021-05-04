@@ -4,31 +4,50 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float MoveSpeed = 0.0f; // 移動速度
-    [SerializeField] private float TorqueForce = 0.0f; // 回転力
-    private Rigidbody _rigid;
+    [SerializeField] private float MoveTime = 0.0f;
+    [SerializeField] private Vector3 MoveDistance = Vector3.zero;
+    private float _elapsedTime;
+    private Vector3 _moveDistance;
 
     public void Initialize()
     {
         Debug.Log("プレイヤーの初期化");
-        _rigid = GetComponent<Rigidbody>();
+        _elapsedTime = 0.0f;
+        _moveDistance = Vector3.zero;
     }
 
     /// <summary>
-    /// 左へ移動
+    /// プレイヤーの更新
     /// </summary>
-    public void MoveLeft()
+    public void UpdatePlayer()
     {
-        _rigid.AddTorque(Vector3.up * -TorqueForce);
-        _rigid.AddForce(Vector3.forward * MoveSpeed);
+        // 移動
+        Move();
     }
 
     /// <summary>
-    /// 右へ移動
+    /// 移動
     /// </summary>
-    public void MoveRight()
+    /// <param name="dir">移動方向</param>
+    public void SetDirection(Vector3 dir)
     {
-        _rigid.AddTorque(Vector3.up * TorqueForce);
-        _rigid.AddForce(Vector3.forward * MoveSpeed);
+        if (_elapsedTime > 0.0f) return;
+        _elapsedTime = MoveTime;
+        Vector3 direction = dir.normalized + Vector3.forward;
+        _moveDistance = Vector3.Scale(MoveDistance,direction);
     }
+
+    /// <summary>
+    /// 移動
+    /// </summary>
+    private void Move()
+    {
+        if(_elapsedTime <= 0.0f) return;
+        _elapsedTime -= Time.deltaTime;
+        float time = Time.deltaTime / MoveTime;
+        Vector3 vel = _moveDistance * time;
+        transform.position += vel;
+    }
+
+
 }

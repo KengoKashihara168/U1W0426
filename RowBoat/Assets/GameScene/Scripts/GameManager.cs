@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _player.UpdatePlayer();
         _cameraManager.UpdateCamera();
     }
 
@@ -32,10 +33,10 @@ public class GameManager : MonoBehaviour
         switch(arrow)
         {
             case ButtonManager.ArrowType.Left:
-            _player.MoveLeft();
+            _player.SetDirection(Vector3.left);
             break;
             case ButtonManager.ArrowType.Right:
-            _player.MoveRight();
+            _player.SetDirection(Vector3.right);
             break;
         }
     }
